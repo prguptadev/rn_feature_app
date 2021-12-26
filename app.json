@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "rn_feature_app",
+    "slug": "rn_feature_app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "rn_feature_app"
+}
