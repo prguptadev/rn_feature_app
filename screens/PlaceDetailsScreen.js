@@ -1,9 +1,22 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 const PlaceDetailsScreen = (props) => {
-  return;
+  const placeTitle = props.navigation.getParam("placeTitle");
+  const placeId = props.navigation.getParam("placeId");
+  return (
+    <View>
+      <Text>{placeId} </Text>
+    </View>
+  );
+};
+
+PlaceDetailsScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: navData.navigation.getParam("placeTitle"),
+  };
 };
 
 const styles = StyleSheet.create({});
+
 export default PlaceDetailsScreen;
