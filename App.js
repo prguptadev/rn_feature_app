@@ -6,6 +6,15 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import PlacesReducer from "./store/reducers/places-action";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
+import { init } from "./helper/db";
+
+init()
+  .then(() => {
+    console.log("DB connected");
+  })
+  .catch((err) => {
+    console.log(" DB FAILED " + err);
+  });
 
 const rootReducer = combineReducers({
   places: PlacesReducer,

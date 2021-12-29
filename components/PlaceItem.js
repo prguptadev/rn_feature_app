@@ -9,6 +9,8 @@ const PlaceItem = (props) => {
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.address}>{props.address}</Text>
+        <Text style={styles.address}>{props.lat}</Text>
+        <Text style={styles.address}>{props.lng}</Text>
       </View>
     </TouchableOpacity>
   );

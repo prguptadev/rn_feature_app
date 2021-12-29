@@ -11,16 +11,22 @@ import Colors from "../constant/Colors";
 import * as PlacesAction from "../store/actions/places-action";
 import { useDispatch, useSelector } from "react-redux";
 import ImagePicker from "../components/ImagePicker";
+import LocationPicker from "../components/LocationPicker";
 
 const NewPlaceScreen = (props) => {
   const dispatch = useDispatch();
   const allplace = useSelector((state) => state.places.places);
-  console.log(allplace);
+  //console.log(allplace);
   const [titleValue, setTitleValue] = useState("");
   const [selectedImage, SetselectedImage] = useState();
+  const [selectedLocation, SetselectedLocation] = useState();
 
   const ImageTakenHandler = (imagePath) => {
     SetselectedImage(imagePath);
+  };
+  const LocationTAkenHandler = (cords) => {
+    //   console.log(cords.coords.latitude);
+    SetselectedLocation(cords.coords);
   };
   const titleChangeHandler = (text) => {
     if (text.length !== 0) {
@@ -30,11 +36,20 @@ const NewPlaceScreen = (props) => {
 
   const savePlaceHandler = () => {
     if (titleValue.trim().length > 0) {
-      dispatch(PlacesAction.addPlace(titleValue, selectedImage));
+      dispatch(
+        PlacesAction.addPlace(
+          titleValue,
+          selectedImage,
+          selectedLocation.latitude,
+          selectedLocation.longitude
+        )
+      );
       props.navigation.goBack();
     }
   };
 
+  // console.log(selectedLocation.latitude);
+  // console.log(selectedLocation.longitude);
   return (
     <ScrollView>
       <View style={styles.screen}>
@@ -58,6 +73,7 @@ const NewPlaceScreen = (props) => {
             </Text>
           )}
           <ImagePicker onImageTaken={ImageTakenHandler} />
+          <LocationPicker onLocationTaken={LocationTAkenHandler} />
           <Button
             title="Save Places"
             color={Colors.primary}

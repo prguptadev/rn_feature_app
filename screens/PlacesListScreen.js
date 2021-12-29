@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeadersButton from "../components/HeadersButton";
 import { useDispatch, useSelector } from "react-redux";
 import PlaceItem from "../components/PlaceItem";
+import * as PlacesAction from "../store/actions/places-action";
 
 const PlacesListScreen = (props) => {
+  const dispatch = useDispatch();
   const allplace = useSelector((state) => state.places.places);
+  //console.log(allplace);
+
+  useEffect(() => {
+    dispatch(PlacesAction.findAll());
+  }, [dispatch]);
 
   const renderPlace = (itemData) => {
     return (
@@ -14,6 +21,8 @@ const PlacesListScreen = (props) => {
         image={itemData.item.imageuri}
         title={itemData.item.title}
         address={null}
+        lat={itemData.item.latitude}
+        lng={itemData.item.longitude}
         onSelect={() => {
           props.navigation.navigate("PlaceDetails", {
             placeTitle: itemData.item.title,
