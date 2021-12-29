@@ -29,13 +29,14 @@ const ImgPicker = (props) => {
       aspect: [16, 9],
       quality: 0.5,
     });
-    console.log(image.uri);
+    //console.log(image.uri);
     setPickedImg(image.uri);
+    props.onImageTaken(image.uri);
   };
   return (
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
-        <Text>No image picker yet.</Text>
+        {!pickedImg && <Text>No image picker yet.</Text>}
         <Image source={{ uri: pickedImg }} style={styles.image} />
       </View>
       <Button

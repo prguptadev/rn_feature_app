@@ -17,7 +17,11 @@ const NewPlaceScreen = (props) => {
   const allplace = useSelector((state) => state.places.places);
   console.log(allplace);
   const [titleValue, setTitleValue] = useState("");
+  const [selectedImage, SetselectedImage] = useState();
 
+  const ImageTakenHandler = (imagePath) => {
+    SetselectedImage(imagePath);
+  };
   const titleChangeHandler = (text) => {
     if (text.length !== 0) {
       setTitleValue(text);
@@ -26,7 +30,7 @@ const NewPlaceScreen = (props) => {
 
   const savePlaceHandler = () => {
     if (titleValue.trim().length > 0) {
-      dispatch(PlacesAction.addPlace(titleValue));
+      dispatch(PlacesAction.addPlace(titleValue, selectedImage));
       props.navigation.goBack();
     }
   };
@@ -53,7 +57,7 @@ const NewPlaceScreen = (props) => {
               Please enter String, Empty not allowed!!
             </Text>
           )}
-          <ImagePicker />
+          <ImagePicker onImageTaken={ImageTakenHandler} />
           <Button
             title="Save Places"
             color={Colors.primary}
