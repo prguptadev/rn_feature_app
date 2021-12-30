@@ -12,7 +12,7 @@ const MapPreview = (props) => {
     }&zoom=15&size=600x500&maptype=roadmap&markers=color:red%7Clabel:A%7C${
       props.location.lat
     },${props.location.lng}&key=${ENV().googleApiKey}`;
-    //  console.log(imagePreviewUrl);
+    ///  console.log(imagePreviewUrl);
   }
 
   return (

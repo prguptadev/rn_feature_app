@@ -21,18 +21,19 @@ export const findAll = () => {
 
 export const addPlace = (title, image, lat, lng) => {
   return async (dispatch) => {
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${
-        ENV().googleApiKey
-      }`
-    );
-    if (!response.ok) {
-      throw new Error("Something got wrong-- FECTH DISTANCE");
-    }
-    const resData = await response.json();
-    if (!resData.results) {
-      throw new Error("wrong addresss");
-    }
+    // const response = await fetch(
+    //   `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${
+    //     ENV().googleApiKey
+    //   }`
+    // );
+    // if (!response.ok) {
+    //   console.log("Something got wrong-- FECTH DISTANCE");
+    //   throw new Error("Something got wrong-- FECTH DISTANCE");
+    // }
+    // const resData = await response.json();
+    // if (!resData.results) {
+    //   throw new Error("wrong addresss");
+    // }
     // console.log(resData.results[0].formatted_address);
 
     const fileName = image.split("/").pop();
@@ -45,7 +46,7 @@ export const addPlace = (title, image, lat, lng) => {
       const response = await insertPlaces(
         title,
         newPath,
-        resData.results[0].formatted_address,
+        "resData.results[0].formatted_address",
         lat,
         lng
       );
@@ -56,7 +57,7 @@ export const addPlace = (title, image, lat, lng) => {
           id: response.insertId,
           title: title,
           imageuri: newPath,
-          address: resData.results[0].formatted_address,
+          address: "resData.results[0].formatted_address",
           lat: lat,
           lng: lng,
         },

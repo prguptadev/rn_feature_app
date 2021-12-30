@@ -8,6 +8,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import Colors from "../constant/Colors";
 import * as PlacesAction from "../store/actions/places-action";
