@@ -20,7 +20,7 @@ const PlacesListScreen = (props) => {
       <PlaceItem
         image={itemData.item.imageuri}
         title={itemData.item.title}
-        address={null}
+        address={itemData.item.address}
         lat={itemData.item.latitude}
         lng={itemData.item.longitude}
         onSelect={() => {

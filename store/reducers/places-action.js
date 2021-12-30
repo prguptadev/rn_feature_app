@@ -15,6 +15,7 @@ export default (state = initialState, action) => {
               plc.id.toString(),
               plc.title,
               plc.imageuri,
+              plc.address,
               plc.lat,
               plc.lng
             )
@@ -26,6 +27,7 @@ export default (state = initialState, action) => {
         action.placeData.id.toString(),
         action.placeData.title,
         action.placeData.imageuri,
+        action.placeData.address,
         action.placeData.lat,
         action.placeData.lng
       );

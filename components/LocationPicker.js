@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Button,
@@ -13,8 +13,11 @@ import Colors from "../constant/Colors";
 //import * as Permissions from "expo-permissions";
 //import * as Camera from "expo-camera";
 import * as Location from "expo-location";
+import MapPreview from "./MapPreview";
 
 const LocationPicker = (props) => {
+  const pickedLocation = props.navigation.getParam("pickedLocation");
+  // console.log(pickedLocation);
   const [pickedloc, setPickedloc] = useState();
   const [isfetched, setisfetched] = useState();
   const verifyPermission = async () => {
@@ -53,8 +56,15 @@ const LocationPicker = (props) => {
         timeout: 5000,
       });
       // console.log(mylocation);
-      setPickedloc(mylocation);
-      props.onLocationTaken(mylocation);
+      setPickedloc({
+        lat: mylocation.coords.latitude,
+        lng: mylocation.coords.longitude,
+      });
+      props.onLocationTaken({
+        lat: mylocation.coords.latitude,
+        lng: mylocation.coords.longitude,
+      });
+      // props.onLocationTaken(mylocation);
     } catch (err) {
       console.log(err);
       Alert.alert("couldn't fetch Location!", "try reset for location", [
@@ -65,25 +75,55 @@ const LocationPicker = (props) => {
 
     //const imagess = await
   };
+  const pickOnMapHandler = () => {
+    props.navigation.navigate("Map");
+  };
+
+  const { onLocationTaken } = props;
+
+  useEffect(() => {
+    if (pickedLocation) {
+      setPickedloc(pickedLocation);
+      onLocationTaken(pickedLocation);
+    }
+  }, [pickedLocation]);
   return (
     <View style={styles.imagePicker}>
-      <View style={styles.imagePreview}>
+      <MapPreview
+        style={styles.imagePreview}
+        location={pickedloc}
+        onPress={pickOnMapHandler}
+      >
         {!!isfetched ? (
+          <ActivityIndicator size="large" color={Colors.primary} />
+        ) : (
+          <Text>No location picker yet.</Text>
+        )}
+      </MapPreview>
+
+      {/* {!!isfetched ? (
           <ActivityIndicator size="large" color={Colors.primary} />
         ) : !!pickedloc ? (
           <View>
-            <Text>latitude= {pickedloc.coords.latitude}</Text>
-            <Text>longitude= {pickedloc.coords.longitude}</Text>
+            <Text>latitude= {pickedloc.lat}</Text>
+            <Text>longitude= {pickedloc.lng}</Text>
           </View>
         ) : (
-          <Text>No image picker yet.</Text>
-        )}
+          <Text>No location picker yet.</Text>
+        )} */}
+
+      <View style={styles.actions}>
+        <Button
+          title="Get User Location"
+          color={Colors.primary}
+          onPress={takeLocationHandler}
+        />
+        <Button
+          title="Pick on Map"
+          color={Colors.primary}
+          onPress={pickOnMapHandler}
+        />
       </View>
-      <Button
-        title="Get User Location"
-        color={Colors.primary}
-        onPress={takeLocationHandler}
-      />
     </View>
   );
 };
@@ -95,16 +135,21 @@ const styles = StyleSheet.create({
   },
   imagePreview: {
     width: "100%",
-    height: 200,
+    height: 160,
     marginBottom: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    //  justifyContent: "center",
+    // alignItems: "center",
     borderColor: "#ccc",
     borderWidth: 1,
   },
   image: {
     width: "100%",
     height: "100%",
+  },
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
   },
 });
 

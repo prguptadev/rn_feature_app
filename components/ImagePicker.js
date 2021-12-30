@@ -57,10 +57,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 40,
     paddingBottom: 20,
+    justifyContent: "center",
   },
   imagePreview: {
     width: "100%",
-    height: 200,
+    height: 250,
     marginBottom: 10,
     justifyContent: "center",
     alignItems: "center",

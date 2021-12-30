@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,6 +6,9 @@ import {
   Button,
   TextInput,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
 } from "react-native";
 import Colors from "../constant/Colors";
 import * as PlacesAction from "../store/actions/places-action";
@@ -21,13 +24,16 @@ const NewPlaceScreen = (props) => {
   const [selectedImage, SetselectedImage] = useState();
   const [selectedLocation, SetselectedLocation] = useState();
 
-  const ImageTakenHandler = (imagePath) => {
+  const ImageTakenHandler = useCallback((imagePath) => {
     SetselectedImage(imagePath);
-  };
-  const LocationTAkenHandler = (cords) => {
-    //   console.log(cords.coords.latitude);
-    SetselectedLocation(cords.coords);
-  };
+  }, []);
+
+  const LocationTAkenHandler = useCallback((location) => {
+    //console.log("dhsdhdkf---- " + location.lat);
+    //console.log("dhsdhdkf---- " + location.lng);
+    SetselectedLocation(location);
+  }, []);
+
   const titleChangeHandler = (text) => {
     if (text.length !== 0) {
       setTitleValue(text);
@@ -40,8 +46,8 @@ const NewPlaceScreen = (props) => {
         PlacesAction.addPlace(
           titleValue,
           selectedImage,
-          selectedLocation.latitude,
-          selectedLocation.longitude
+          selectedLocation.lat,
+          selectedLocation.lng
         )
       );
       props.navigation.goBack();
@@ -51,37 +57,44 @@ const NewPlaceScreen = (props) => {
   // console.log(selectedLocation.latitude);
   // console.log(selectedLocation.longitude);
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <View style={styles.formcontrol}>
-          <Text style={styles.label}>Title: </Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={titleChangeHandler}
-            value={titleValue}
-          />
-          {!titleValue && (
-            <Text
-              style={{
-                color: "red",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {" "}
-              Please enter String, Empty not allowed!!
-            </Text>
-          )}
-          <ImagePicker onImageTaken={ImageTakenHandler} />
-          <LocationPicker onLocationTaken={LocationTAkenHandler} />
-          <Button
-            title="Save Places"
-            color={Colors.primary}
-            onPress={savePlaceHandler}
-          />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "android" ? "height" : "padding"}
+    >
+      <ScrollView>
+        <View style={styles.screen}>
+          <View style={styles.formcontrol}>
+            <Text style={styles.label}>Title: </Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={titleChangeHandler}
+              value={titleValue}
+            />
+            {!titleValue && (
+              <Text
+                style={{
+                  color: "red",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {" "}
+                Please enter String, Empty not allowed!!
+              </Text>
+            )}
+            <ImagePicker onImageTaken={ImageTakenHandler} />
+            <LocationPicker
+              onLocationTaken={LocationTAkenHandler}
+              navigation={props.navigation}
+            />
+            <Button
+              title="Save Places"
+              color={Colors.primary}
+              onPress={savePlaceHandler}
+            />
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
