@@ -2677,7 +2677,18 @@ expo-location@~14.0.1:
     "@expo/config-plugins" "^4.0.2"
     unimodules-task-manager-interface "~7.1.0"
 
-expo-modules-autolinking@0.5.2, expo-modules-autolinking@~0.5.1:
+expo-modules-autolinking@0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-0.5.4.tgz#d105d46cb6faab71c72c3181b9c2ab8cc8b09dba"
+  integrity sha512-Q2wQp7tE7nlkmIQslQxa02uswOAJZXuJHWmb5oCG8BkzL6QBmDURJ/1j5hlIKuyN+j1M0rZbzyVI+ufyziGsSQ==
+  dependencies:
+    chalk "^4.1.0"
+    commander "^7.2.0"
+    fast-glob "^3.2.5"
+    find-up "^5.0.0"
+    fs-extra "^9.1.0"
+
+expo-modules-autolinking@~0.5.1:
   version "0.5.2"
   resolved "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-0.5.2.tgz"
   integrity sha512-0mh9XpU8smGaZYT/D/lkGoYRw+gwUrUZs/LiHH7Z7vlUS6jhjvM13Vi2PgfdHjMuOgHy9GjqRrIoDsjuzjfnGQ==
@@ -2721,10 +2732,10 @@ expo-status-bar@~1.2.0:
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.2.0.tgz"
   integrity sha512-pVZZ/kDCXFK79E4dCtRecs3XLC8aiwlciutSd/fFmUPJSQZ1Txia6hlKajPt0GAYft8/YnT0V3URXzWZOBniYQ==
 
-expo@^44.0.1:
-  version "44.0.1"
-  resolved "https://registry.npmjs.org/expo/-/expo-44.0.1.tgz"
-  integrity sha512-r3UXg8d2ypcK2I8ds5r9WP6luOLKH4tTqtdgOS+rQt3jpMpkF89VRnNB/Ux3GnzxHnxIHcEmTYBmfoI3qA4abg==
+expo@^44.0.0:
+  version "44.0.3"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-44.0.3.tgz#6f30ff51fbb2608a408c7ac10aeb703fc04d304e"
+  integrity sha512-uk6t89gV5Gs5MdHXZkjKlBdXSo4j+oKj/BrK/FTFlKvEqEL34SbEXy9IcS0o7IDPFuqVIzclXcnAI+sOU4J5Lg==
   dependencies:
     "@babel/runtime" "^7.14.0"
     "@expo/metro-config" "~0.2.6"
@@ -2737,7 +2748,7 @@ expo@^44.0.1:
     expo-file-system "~13.1.0"
     expo-font "~10.0.4"
     expo-keep-awake "~10.0.1"
-    expo-modules-autolinking "0.5.2"
+    expo-modules-autolinking "0.5.4"
     expo-modules-core "0.6.3"
     fbemitter "^2.1.1"
     invariant "^2.2.4"
@@ -4715,9 +4726,9 @@ react-native-reanimated@~2.3.1:
     react-native-screens "^3.4.0"
     string-hash-64 "^1.0.3"
 
-react-native-safe-area-context@^3.3.2:
+react-native-safe-area-context@3.3.2:
   version "3.3.2"
-  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"
   integrity sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q==
 
 react-native-safe-area-view@^0.14.9:

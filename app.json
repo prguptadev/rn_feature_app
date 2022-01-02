@@ -2,7 +2,7 @@
   "expo": {
     "name": "rn_feature_app",
     "slug": "rn_feature_app",
-    "sdkVersion": "43.0.0",
+    "sdkVersion": "44.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "default",
